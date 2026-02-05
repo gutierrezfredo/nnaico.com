@@ -16,16 +16,16 @@ Need the request form? I can send you the link.`
   },
   {
     label: "New Employee Onboarding",
-    user: "I just started - how do I set up my dev environment?",
-    assistant: `Welcome to the team! Here's your setup guide:
+    user: "I'm new here - how do I submit expense reports?",
+    assistant: `Welcome to the team! Here's how to submit expenses:
 
-1. Clone repo: git clone git@github.com:acme/app
-2. Install dependencies: npm install
-3. Copy .env.example to .env
-4. Start database: docker-compose up -d
-5. Run app: npm run dev
+1. Log into Workday (HR portal)
+2. Go to Expenses > Create Report
+3. Upload receipts (photo or PDF)
+4. Select expense category
+5. Submit for manager approval
 
-Full guide in Engineering Docs. Ping #dev-help on Slack if stuck!`
+Tip: Submit within 30 days of purchase. Need the Workday link?`
   },
   {
     label: "Sales Enablement",
@@ -95,26 +95,26 @@ export default function Hero() {
   return (
     <section className="min-h-screen relative overflow-hidden bg-gradient-to-b from-blue-50 via-blue-100/50 to-amber-100/30">
       {/* Content */}
-      <div className="pt-32 pb-16 md:pt-40 md:pb-24 lg:pt-48">
+      <div className="pt-32 pb-14 md:pt-40 md:pb-20 lg:pt-48">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight text-gray-900">
-              Every Answer Your Team Needs,{' '}
-              <span className="text-primary-600 italic">Instantly</span>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-gray-900">
+              Every Answer Your Team<br />
+              Needs, <span className="text-primary-600 italic">Instantly</span>
             </h1>
             <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
               Train AI on your company's knowledge. Give your team instant answers to any question.
             </p>
-            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href="#demo"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 text-gray-900 font-semibold rounded-full hover:bg-white hover:border-gray-400 transition-colors"
+                className="inline-flex items-center justify-center py-3 px-6 border-2 border-gray-300 text-gray-900 font-semibold rounded-full hover:bg-white hover:border-gray-400 transition-colors"
               >
                 Learn more
               </a>
               <a
                 href="https://insight.nnaico.com"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-600 text-white font-semibold rounded-full hover:bg-primary-700 transition-colors shadow-lg"
+                className="inline-flex items-center justify-center gap-2 py-3 px-6 bg-primary-600 text-white font-semibold rounded-full hover:bg-primary-700 transition-colors"
               >
                 Start free trial
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -166,7 +166,7 @@ export default function Hero() {
             {/* Chat content */}
             <div className="p-8 md:p-10 pt-14 bg-gradient-to-b from-gray-50 to-white">
               {/* Messages area */}
-              <div key={activeIndex} className="min-h-[340px] space-y-6 animate-[fadeIn_0.5s_ease-out]">
+              <div key={activeIndex} className="min-h-[400px] space-y-6 animate-[fadeIn_0.5s_ease-out]">
                 {/* User message */}
                 <div className="flex justify-end">
                   <div className="max-w-[75%] bg-primary-600 rounded-2xl rounded-tr-sm px-6 py-4 shadow-[0_4px_20px_rgba(37,99,235,0.3)]">

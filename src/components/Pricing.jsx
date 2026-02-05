@@ -53,7 +53,7 @@ export default function Pricing() {
   return (
     <section id="pricing" className="py-16 md:py-24 lg:py-32 bg-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
             Simple Pricing. Powerful Results.
           </h2>
@@ -66,7 +66,7 @@ export default function Pricing() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`rounded-2xl p-8 ${
+              className={`rounded-2xl p-8 flex flex-col ${
                 plan.popular
                   ? 'bg-primary-600 text-white ring-4 ring-primary-300 scale-105'
                   : 'bg-white border border-gray-200'
@@ -91,7 +91,7 @@ export default function Pricing() {
               <p className={`text-sm mb-6 ${plan.popular ? 'text-blue-100' : 'text-gray-600'}`}>
                 {plan.description}
               </p>
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 mb-8 flex-grow">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-3">
                     <svg

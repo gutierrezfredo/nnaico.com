@@ -25,7 +25,7 @@ export default function Navbar() {
             </a>
             <a
               href="https://insight.nnaico.com"
-              className="inline-flex items-center justify-center px-4 py-1.5 bg-primary-600 text-white font-medium rounded-full hover:bg-primary-700 transition-colors text-sm"
+              className="inline-flex items-center justify-center py-2 px-4 bg-primary-600 text-white font-semibold rounded-full hover:bg-primary-700 transition-colors text-sm"
             >
               Start Free Trial
             </a>

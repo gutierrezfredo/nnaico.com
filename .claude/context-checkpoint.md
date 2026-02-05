@@ -1,7 +1,7 @@
 # Nnaico.com Context Checkpoint
 
 **Date:** 2026-02-04
-**Last Updated:** 2026-02-04 20:49 (most recent file modification)
+**Last Updated:** 2026-02-04 22:30 (latest session)
 **Project:** Nnaico marketing website
 
 ---
@@ -12,12 +12,28 @@ Built a complete marketing website for Nnaico, an AI assistant platform for busi
 
 The site positions Nnaico as "AI That Actually Knows Your Business" - targeting SMBs (10-100 employees) who need private, company-specific AI assistants trained on their own documents.
 
-**Major Updates This Session:**
-- Hero section completely redesigned with animated chat mockup that cycles through 4 conversation scenarios
-- New ChatMockup component created for reusable chat UI across ValueProps and UseCases
-- ValueProps redesigned with gradient cards and embedded chat mockups
-- UseCases now has interactive card selection with dynamic chat preview
-- Consistent visual language with AI avatar, message bubbles, and input field styling
+**Latest Session Updates:**
+- Hero section: Static headline with line break ("Every Answer Your Team\nNeeds, Instantly"), smaller buttons (py-3 px-6), rotating chat demos with prev/next arrows, pause on interaction
+- Navbar: Transparent with backdrop blur (bg-white/30 backdrop-blur-xl), centered nav links (absolute positioned), smaller height (h-14)
+- ValueProps ("Why Teams Choose Nnaico"): 3-column grid with icons, no chat mockups
+- UseCases ("Built for How You Actually Work"): 2-column layout (selection cards left, chat right), 4 use cases with action-oriented conversations (not tech-focused), green outcome box
+- CapabilitiesShowcase ("See What Nnaico Can Do"): 2-column layout with 2x4 grid of capability cards, ChatMockup component with hasChart/hasDownload support
+- Testimonials: Single card with rotating quotes, logo selector at bottom, light blue background
+- Pricing: Cards use flex layout to push buttons to bottom, increased header gap (mb-20)
+- HowItWorks: Increased header gap (mb-20)
+- Button standardization: All buttons use py-3 px-6 font-semibold rounded-full (navbar uses smaller py-2 px-4)
+- Non-tech focus: Removed dev environment examples, using expense reports/general business examples instead
+
+---
+
+## Deployment
+
+| Item | Value |
+|------|-------|
+| GitHub Repository | https://github.com/gutierrezfredo/nnaico.com |
+| Cloudflare Pages | https://nnaico.pages.dev |
+| Deploy Command | `npm run build && npx wrangler pages deploy dist --project-name=nnaico --branch=main` |
+| Uncommitted Changes | Yes, several styling and content updates since initial commit |
 
 ---
 
@@ -30,11 +46,11 @@ The site positions Nnaico as "AI That Actually Knows Your Business" - targeting 
 | Pricing - Enterprise | Custom (unlimited, self-hosted option) |
 | Target market | SMBs with 10-100 employees (e-commerce, SaaS, agencies, course creators) |
 | Positioning | "AI That Actually Knows Your Business" - NOT a chatbot |
-| Hero headline | "Every Answer Your Team Needs, Instantly" |
+| Hero headline | "Every Answer Your Team\nNeeds, Instantly" (static with line break) |
 | Product URL | https://insight.nnaico.com |
 | Testimonial companies | Racing Force Group, SeedTrust Escrow |
 | Trial offer | 14-day free trial, no credit card required |
-| Hero animation | Typing effect with 4 rotating scenarios (Knowledge Bottleneck, New Employee Onboarding, Sales Enablement, Instant Support) |
+| Hero chat demos | Rotating with prev/next arrows, pause on interaction |
 
 ---
 
@@ -42,33 +58,16 @@ The site positions Nnaico as "AI That Actually Knows Your Business" - targeting 
 
 ### Working Components (13 total)
 
-1. **Navbar** - Fixed nav with logo, links (Features, How It Works, Pricing), Sign In, Start Free Trial CTA
-2. **Hero** - Animated chat mockup with:
-   - Typing effect for user questions
-   - Message "sending" animation
-   - AI response typing with cursor
-   - 4 rotating conversation scenarios
-   - Floating stat cards (2,847 questions answered, 1.2s avg response)
-   - 3D perspective tilt effect
-   - Dot indicators for scenario navigation
-3. **ChatMockup** - Reusable component with two modes:
-   - `minimal`: Clean floating messages for ValueProps/UseCases (AI avatar, source citations)
-   - Full: Window chrome style (not currently used)
-4. **ValueProps** - "Why Teams Choose Nnaico" section with:
-   - 1 large featured card + 2 side-by-side cards
-   - Gradient backgrounds (primary-100 to cyan-100)
-   - Embedded ChatMockup components with real conversation examples
-   - Source citations in AI responses
-5. **UseCases** - "Built for How You Actually Work" with:
-   - 4 clickable cards in 2x2 grid (Customer Support, Employee Onboarding, Sales Enablement, Internal Knowledge Base)
-   - Active state with ring highlight and shadow
-   - Dynamic chat preview below that updates on selection
-   - Problem/outcome messaging
-6. **HowItWorks** - 3-step process: Upload Knowledge, Create Assistants, Start Asking
-7. **Features** - 8-feature grid: Multiple Assistants, Knowledge Base, Memory, Flexible LLMs, Built-in Tools, Contact Collector, Admin Dashboard, Website Embedding
-8. **CapabilitiesShowcase** - Interactive tabbed demo showing: Memory, Charts, File Export, Contact Collector, Web Search, Reports, Code Execution
-9. **Testimonials** - 2 testimonials from Racing Force Group and SeedTrust Escrow
-10. **Pricing** - 3-tier pricing cards (Starter, Growth, Enterprise)
+1. **Navbar** - Transparent with backdrop blur (bg-white/30 backdrop-blur-xl), centered nav links, h-14 height, smaller button sizing (py-2 px-4)
+2. **Hero** - Static headline with line break, smaller buttons (py-3 px-6), rotating chat demos with prev/next arrows, pause on interaction
+3. **ChatMockup** - Reusable component with support for hasChart and hasDownload props for interactive capabilities
+4. **ValueProps** - "Why Teams Choose Nnaico" - 3-column grid with icons, no chat mockups
+5. **UseCases** - "Built for How You Actually Work" - 2-column layout (selection cards left, chat right), 4 use cases with action-oriented conversations, green outcome box
+6. **HowItWorks** - 3-step process with increased header gap (mb-20)
+7. **Features** - 8-feature grid
+8. **CapabilitiesShowcase** - "See What Nnaico Can Do" - 2-column layout with 2x4 capability cards grid, ChatMockup with hasChart/hasDownload
+9. **Testimonials** - Single card with rotating quotes, logo selector at bottom, light blue background
+10. **Pricing** - 3-tier cards with flex layout pushing buttons to bottom, increased header gap (mb-20)
 11. **FAQ** - 6 expandable FAQ items with accordion behavior
 12. **FinalCTA** - Gradient background with final call-to-action
 13. **Footer** - Brand description, Product links, Company links, social icons
@@ -90,45 +89,33 @@ The site positions Nnaico as "AI That Actually Knows Your Business" - targeting 
 - Muted: #64748B
 - Base font size: 18px
 
-### Visual Design Patterns
+### Button Standardization
 
-- AI Avatar: Gradient circle (primary-500 to cyan-500) with lightning bolt icon
-- User messages: Blue gradient bubble, right-aligned
-- AI messages: White bubble with shadow, left-aligned, optional source citation
-- Input field: Gray-50 background with chat icon and send button
-- Cards: Rounded-3xl with gradient backgrounds
-- Shadows: Large, soft shadows (0_8px_40px)
+- Standard buttons: py-3 px-6 font-semibold rounded-full
+- Navbar buttons: py-2 px-4 (smaller)
+- Consistent sizing across Hero, Pricing, FinalCTA sections
 
 ---
 
-## Files Modified/Created
-
-### Root Files
-- `/Users/alfredo/Developer/github.com/gutierrezfredo/nnaico.com/CLAUDE.md` - Project template instructions
-- `/Users/alfredo/Developer/github.com/gutierrezfredo/nnaico.com/DESIGN_RULES.md` - Spacing and typography guidelines
-- `/Users/alfredo/Developer/github.com/gutierrezfredo/nnaico.com/package.json` - Dependencies
+## Files Modified This Session
 
 ### Source Files
-- `/Users/alfredo/Developer/github.com/gutierrezfredo/nnaico.com/src/App.jsx` - Main app with all component imports
-- `/Users/alfredo/Developer/github.com/gutierrezfredo/nnaico.com/src/index.css` - Brand colors and global styles
-- `/Users/alfredo/Developer/github.com/gutierrezfredo/nnaico.com/src/main.jsx` - React entry point
+- `/Users/alfredo/Developer/github.com/gutierrezfredo/nnaico.com/src/App.jsx`
+- `/Users/alfredo/Developer/github.com/gutierrezfredo/nnaico.com/src/index.css`
 
 ### Components (all in /src/components/)
-| File | Last Modified | Notes |
-|------|---------------|-------|
-| `Hero.jsx` | 20:49 | Animated chat with 4 scenarios, typing effects |
-| `ValueProps.jsx` | 20:33 | Gradient cards with ChatMockup |
-| `ChatMockup.jsx` | 20:22 | New - reusable chat UI component |
-| `UseCases.jsx` | 20:18 | Interactive card selection |
-| `Navbar.jsx` | 20:14 | Fixed nav |
-| `HowItWorks.jsx` | 20:14 | 3-step process |
-| `CapabilitiesShowcase.jsx` | 20:14 | Interactive tabs |
-| `Pricing.jsx` | 20:14 | 3-tier cards |
-| `FAQ.jsx` | 19:36 | Accordion |
-| `FinalCTA.jsx` | 19:36 | Final CTA |
-| `Footer.jsx` | 19:36 | Footer |
-| `Features.jsx` | 19:34 | 8-feature grid |
-| `Testimonials.jsx` | 19:35 | 2 testimonials |
+| File | Key Changes |
+|------|-------------|
+| `Hero.jsx` | Static headline with line break, smaller buttons, rotating chat with arrows, pause on interaction |
+| `Navbar.jsx` | Transparent with backdrop blur, centered nav, h-14, smaller buttons |
+| `ValueProps.jsx` | 3-column grid with icons, removed chat mockups |
+| `UseCases.jsx` | 2-column layout, action-oriented conversations, green outcome box |
+| `CapabilitiesShowcase.jsx` | 2-column layout, 2x4 grid, hasChart/hasDownload support |
+| `ChatMockup.jsx` | Added hasChart and hasDownload props |
+| `Testimonials.jsx` | Single rotating card, logo selector, light blue background |
+| `Pricing.jsx` | Flex layout for button alignment, mb-20 header gap |
+| `HowItWorks.jsx` | Increased header gap (mb-20) |
+| `FinalCTA.jsx` | Button sizing standardization |
 
 ### Assets (in /public/)
 - `logo.png` - Nnaico logo
@@ -143,16 +130,15 @@ The site positions Nnaico as "AI That Actually Knows Your Business" - targeting 
 ## Next Steps
 
 ### Immediate
-- [ ] Initialize git repo (currently not a git repository)
-- [ ] Test website locally (`npm run dev`)
+- [ ] Commit and push latest changes to GitHub
+- [ ] Deploy to Cloudflare Pages
 - [ ] Review and adjust copy if needed
 - [ ] Get SeedTrust permission for testimonial/case study
-- [ ] Deploy to production (when ready)
 
 ### Future Enhancements
 - [ ] Add mobile hamburger menu to Navbar
 - [ ] Add actual customer logos to testimonials
-- [ ] Create demo video section (currently #demo links to CapabilitiesShowcase)
+- [ ] Create demo video section
 - [ ] Add contact form or Calendly integration for Enterprise tier
 - [ ] Set up analytics tracking
 - [ ] Build target company list (50 companies for cold outreach)
@@ -167,28 +153,21 @@ The site positions Nnaico as "AI That Actually Knows Your Business" - targeting 
 - SeedTrust Escrow is an actual customer (need permission for case study)
 - Racing Force Group is also referenced as a customer
 
-### Hero Animation Details
-The Hero section cycles through 4 conversation scenarios:
-1. **Knowledge Bottleneck**: "Who handles vendor contracts?" → Sarah Chen + approval process
-2. **New Employee Onboarding**: "How do I set up my dev environment?" → Step-by-step setup guide
-3. **Sales Enablement**: "Why we're better than CompetitorX?" → Key differentiators list
-4. **Instant Support**: "What's our refund policy?" → Enterprise refund policy details
-
-Animation phases:
-- `typing-input`: Types user question in input field (18ms per char)
-- `sent`: Message moves to chat area
-- `typing-response`: AI response types out (8ms per char)
-- `done`: Wait 3s, then cycle to next scenario
+### UseCases Content (Action-Oriented)
+The use cases now focus on business outcomes rather than technical examples:
+1. Customer Support - handling order cancellation policies
+2. Employee Onboarding - expense report submissions
+3. Sales Enablement - proposal generation
+4. Internal Knowledge Base - team documentation
 
 ### Related Documents
-- Marketing strategy: `Docs/Projects/Nnaico/Marketing Strategy.md` (Obsidian vault)
-- Website copy: `Docs/Projects/Nnaico/Website Copy.md` (Obsidian vault)
-- Cold emails: `Docs/Projects/Nnaico/Cold Emails.md` (Obsidian vault)
 - Session log: `Docs/Session Logs/nnaico.md` (Obsidian vault)
+- Marketing strategy docs in Obsidian vault
 
 ### Key URLs
 - Product: https://insight.nnaico.com
-- Website (to deploy): nnaico.com
+- Website: https://nnaico.pages.dev (Cloudflare Pages)
+- GitHub: https://github.com/gutierrezfredo/nnaico.com
 - Contact: hello@nnaico.com
 
 ### Design Principles

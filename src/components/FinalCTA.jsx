@@ -11,10 +11,10 @@ export default function FinalCTA() {
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="https://insight.nnaico.com"
-            className="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-100 transition-colors"
+            className="inline-flex items-center justify-center py-3 px-6 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-100 transition-colors"
           >
             Start Your Free Trial
-            <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
