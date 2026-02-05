@@ -7,7 +7,6 @@ const plans = [
     features: [
       '3 assistants',
       '10 users',
-      '1GB knowledge base',
       'All tools included',
       'Email support'
     ],
@@ -22,7 +21,6 @@ const plans = [
     features: [
       '10 assistants',
       '50 users',
-      '10GB knowledge base',
       'All tools included',
       'Priority support',
       'Advanced analytics'
