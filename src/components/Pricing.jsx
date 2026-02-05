@@ -36,7 +36,6 @@ const plans = [
     features: [
       'Unlimited assistants',
       'Unlimited users',
-      'Unlimited storage',
       'Self-hosted option',
       'Dedicated support',
       'Custom integrations',
