@@ -1,37 +1,22 @@
-# Website Prototype
+# Nnaico.com
 
-**Purpose:** Quick prototyping for websites (blogs, portfolios, e-commerce, landing pages). No backend, no deployment.
+Marketing website prototype for Nnaico AI platform. **No backend.**
 
-**Not for:** SaaS, dashboards, admin panels → use `app-prototype` template.
+## Domain Context
 
-## Design Rules (MANDATORY)
-ALWAYS read `DESIGN_RULES.md` before creating or modifying any UI.
+See `docs/PRODUCT.md` for positioning, target customers, and terminology.
+See Obsidian `Docs/Projects/Nnaico/` for marketing strategy and cold emails.
 
-## Tech Stack
+## Rules
 
-- Vite + React + Tailwind CSS v4
-- Plain divs (no component library)
+| Rule | Details |
+|------|---------|
+| Design | ALWAYS read `DESIGN_RULES.md` before UI changes |
+| Features | Update `docs/FEATURES.md` after implementing sections |
+| Product docs | Update `docs/PRODUCT.md` when adding messaging or positioning |
+| Constraints | No backend, no API calls. All data is mocked. |
 
-## Common Sections
+## Tech & Deploy
 
-- Hero — headline, subtext, CTA buttons
-- Features — grid of feature cards
-- Testimonials — customer quotes
-- Pricing — pricing tiers
-- CTA — call-to-action banner
-- Footer — links, social, copyright
-
-## File Structure
-
-```
-src/
-├── components/
-│   ├── Hero.jsx
-│   ├── Features.jsx
-│   └── Footer.jsx
-├── index.css
-├── App.jsx
-└── main.jsx
-```
-
-Focus on UX validation. Rebuild with `site-production` when ready for production.
+- **Stack:** Vite + React + Tailwind CSS v4
+- **Status:** Prototype only
