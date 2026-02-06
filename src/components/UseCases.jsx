@@ -5,9 +5,8 @@ const useCases = [
   {
     id: 'onboarding',
     title: "Employee Onboarding",
-    problem: "New hires take weeks to learn your processes",
-    solution: "Upload your procedures. New hires ask the AI instead of interrupting.",
-    outcome: "Productive in days, not months. Senior staff get their time back.",
+    description: "New hires productive in days",
+    gradient: "from-blue-400 to-indigo-500",
     conversation: [
       {
         role: 'user',
@@ -38,19 +37,14 @@ Your expense approver is Lisa Chen (your direct manager). She typically approves
 
 I've also sent you the full Expense Policy PDF to your email!`
       }
-    ],
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-      </svg>
-    )
+    ]
   },
   {
     id: 'sales',
     title: "Sales Enablement",
-    problem: "Your sales team can't find product info fast enough",
-    solution: "Instant access to specs, pricing, competitive intel",
-    outcome: "Faster responses, more closed deals, consistent messaging.",
+    description: "Close deals faster with instant intel",
+    gradient: "from-cyan-400 to-blue-500",
+    image: "/images/use-case-sales.png",
     conversation: [
       {
         role: 'user',
@@ -81,19 +75,14 @@ It includes objection handling and customer win stories.
 
 Good luck with the pitch! Let me know how it goes.`
       }
-    ],
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-      </svg>
-    )
+    ]
   },
   {
     id: 'knowledge',
-    title: "Internal Knowledge Base",
-    problem: "Information trapped in docs nobody reads",
-    solution: "One AI that knows everything about your company",
-    outcome: "Any employee, any question, instant answer.",
+    title: "Knowledge Base",
+    description: "Any question, instant answer",
+    gradient: "from-emerald-400 to-teal-500",
+    image: "/images/use-case-knowledge.png",
     conversation: [
       {
         role: 'user',
@@ -123,19 +112,14 @@ Your manager (David) will be notified and typically approves within 24 hours.
 
 I'll let you know once it's approved!`
       }
-    ],
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-      </svg>
-    )
+    ]
   },
   {
     id: 'support',
     title: "Customer Support",
-    problem: "Your team answers the same 20 questions daily",
-    solution: "AI assistant trained on your FAQs, policies, and products",
-    outcome: "Customers get instant answers. Your team handles real issues.",
+    description: "Instant answers for customers",
+    gradient: "from-violet-400 to-purple-500",
+    image: "/images/use-case-support.png",
     conversation: [
       {
         role: 'user',
@@ -163,12 +147,7 @@ A shipping label has been sent to your email. Just drop it off at any UPS locati
 
 Anything else I can help with?`
       }
-    ],
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
-      </svg>
-    )
+    ]
   }
 ]
 
@@ -178,44 +157,53 @@ export default function UseCases() {
   const activeUseCase = useCases.find(uc => uc.id === activeCase)
 
   return (
-    <section className="py-16 md:py-24 lg:py-32 bg-blue-50">
+    <section className="py-16 md:py-24 lg:py-32 bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
             Built for How You Actually Work
           </h2>
-          <p className="mt-4 text-lg text-gray-600">
+          <p className="mt-4 text-lg text-slate-400">
             Real solutions to real problems your company faces every day.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Left: Selection cards */}
-          <div className="space-y-3">
+        <div className="grid lg:grid-cols-[440px_1fr] gap-12 items-start">
+          {/* Left: Image selection tiles */}
+          <div className="grid grid-cols-2 gap-4">
             {useCases.map((useCase) => (
               <button
                 key={useCase.id}
                 onClick={() => setActiveCase(useCase.id)}
-                className={`w-full text-left rounded-xl p-5 transition-all ${
+                className={`relative rounded-2xl p-4 text-left transition-all overflow-hidden aspect-[3/4] ${
                   activeCase === useCase.id
-                    ? 'bg-white shadow-lg ring-2 ring-primary-500'
-                    : 'bg-white/50 hover:bg-white hover:shadow-md'
+                    ? 'ring-2 ring-primary-500 ring-offset-2'
+                    : 'hover:ring-2 hover:ring-gray-300'
                 }`}
               >
-                <div className="flex items-start gap-4">
-                  <div className={`inline-flex items-center justify-center w-10 h-10 rounded-lg flex-shrink-0 ${
-                    activeCase === useCase.id
-                      ? 'bg-primary-600 text-white'
-                      : 'bg-primary-100 text-primary-700'
-                  }`}>
-                    {useCase.icon}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base font-bold text-gray-900 mb-1">
-                      {useCase.title}
-                    </h3>
-                    <p className="text-sm text-gray-600">{useCase.problem}</p>
-                  </div>
+                {/* Background image */}
+                <img
+                  src={useCase.image || "/images/use-cases-bg.avif"}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+
+                {/* Color overlay for active tile */}
+                {activeCase === useCase.id && (
+                  <div className={`absolute inset-0 bg-gradient-to-br ${useCase.gradient} opacity-50`} />
+                )}
+
+                {/* Dark gradient for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+
+                {/* Text content at bottom */}
+                <div className="absolute bottom-5 left-5 right-5 z-10">
+                  <h3 className="text-xl font-bold text-white leading-tight drop-shadow-sm">
+                    {useCase.title}
+                  </h3>
+                  <p className="text-base text-white/90 mt-2 drop-shadow-sm">
+                    {useCase.description}
+                  </p>
                 </div>
               </button>
             ))}
@@ -223,19 +211,11 @@ export default function UseCases() {
 
           {/* Right: Chat Mockup */}
           <div className="lg:sticky lg:top-24">
-            <ChatMockup conversation={activeUseCase.conversation} minimal />
-            <div className="mt-4 bg-green-50 border border-green-200 rounded-xl px-5 py-4">
-              <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                  <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold text-green-700 uppercase tracking-wide mb-1">Outcome</p>
-                  <p className="text-sm text-green-900">{activeUseCase.outcome}</p>
-                </div>
-              </div>
+            <div
+              key={activeCase}
+              className="animate-[fadeIn_0.4s_ease-out]"
+            >
+              <ChatMockup conversation={activeUseCase.conversation} minimal />
             </div>
           </div>
         </div>

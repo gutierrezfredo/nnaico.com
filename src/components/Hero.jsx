@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { FloatingShapes } from './ui/ElegantShapes'
 
 const conversations = [
   {
@@ -57,29 +58,126 @@ Source: Enterprise Terms (updated Jan 2026)`
   }
 ]
 
+// Component to animate words appearing
+function AnimatedText({ text, isFirstLine }) {
+  const [visibleWords, setVisibleWords] = useState(0)
+  const words = text.split(/(\s+)/) // Split but keep whitespace
+
+  useEffect(() => {
+    setVisibleWords(0)
+    const totalWords = words.filter(w => w.trim()).length
+    let currentWord = 0
+
+    const interval = setInterval(() => {
+      currentWord++
+      setVisibleWords(currentWord)
+      if (currentWord >= totalWords) {
+        clearInterval(interval)
+      }
+    }, 30) // Speed of word appearance
+
+    return () => clearInterval(interval)
+  }, [text])
+
+  let wordIndex = 0
+  return (
+    <span className={isFirstLine ? 'font-semibold' : ''}>
+      {words.map((word, i) => {
+        if (!word.trim()) {
+          // It's whitespace, render as-is
+          return <span key={i}>{word}</span>
+        }
+        const currentWordIndex = wordIndex
+        wordIndex++
+        return (
+          <span
+            key={i}
+            className="inline-block transition-all duration-200"
+            style={{
+              opacity: currentWordIndex < visibleWords ? 1 : 0,
+              transform: currentWordIndex < visibleWords ? 'translateY(0)' : 'translateY(4px)',
+            }}
+          >
+            {word}
+          </span>
+        )
+      })}
+    </span>
+  )
+}
+
 export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
+  const [isTyping, setIsTyping] = useState(true)
+  const [showAnswer, setShowAnswer] = useState(false)
+  const [isExiting, setIsExiting] = useState(false)
+  const touchStartX = useRef(0)
+  const pendingIndex = useRef(null)
 
   const currentConvo = conversations[activeIndex]
 
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = (e) => {
+    const touchEndX = e.changedTouches[0].clientX
+    const diff = touchStartX.current - touchEndX
+
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        goToNext()
+      } else {
+        goToPrev()
+      }
+    }
+  }
+
+  const changeConversation = (newIndex) => {
+    if (isExiting) return
+    setIsExiting(true)
+    pendingIndex.current = newIndex
+    setTimeout(() => {
+      setActiveIndex(newIndex)
+      setIsExiting(false)
+    }, 300)
+  }
+
   const goToNext = () => {
-    setActiveIndex(prev => (prev + 1) % conversations.length)
+    const newIndex = (activeIndex + 1) % conversations.length
+    changeConversation(newIndex)
     setIsPaused(true)
-    setTimeout(() => setIsPaused(false), 10000) // Resume auto-rotate after 10s
+    setTimeout(() => setIsPaused(false), 10000)
   }
 
   const goToPrev = () => {
-    setActiveIndex(prev => (prev - 1 + conversations.length) % conversations.length)
+    const newIndex = (activeIndex - 1 + conversations.length) % conversations.length
+    changeConversation(newIndex)
     setIsPaused(true)
     setTimeout(() => setIsPaused(false), 10000)
   }
 
   const goToIndex = (index) => {
-    setActiveIndex(index)
+    if (index === activeIndex) return
+    changeConversation(index)
     setIsPaused(true)
     setTimeout(() => setIsPaused(false), 10000)
   }
+
+  // Handle typing animation when conversation changes
+  useEffect(() => {
+    setIsTyping(true)
+    setShowAnswer(false)
+
+    // Show typing indicator after question appears
+    const typingTimer = setTimeout(() => {
+      setIsTyping(false)
+      setShowAnswer(true)
+    }, 1000)
+
+    return () => clearTimeout(typingTimer)
+  }, [activeIndex])
 
   // Auto-rotate conversations
   useEffect(() => {
@@ -87,34 +185,37 @@ export default function Hero() {
 
     const timer = setInterval(() => {
       setActiveIndex(prev => (prev + 1) % conversations.length)
-    }, 6000)
+    }, 10000)
 
     return () => clearInterval(timer)
   }, [isPaused])
 
   return (
-    <section className="min-h-screen relative overflow-hidden bg-gradient-to-b from-blue-50 via-blue-100/50 to-amber-100/30">
+    <section className="relative bg-gradient-to-b from-blue-950 via-slate-900 to-blue-950">
+      {/* Floating shapes background */}
+      <FloatingShapes />
+
       {/* Content */}
-      <div className="pt-32 pb-14 md:pt-40 md:pb-20 lg:pt-48">
+      <div className="relative z-10 pt-32 md:pt-40 lg:pt-48">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-gray-900">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-white">
               Every Answer Your Team<br />
               Needs, <span className="text-primary-600 italic">Instantly</span>
             </h1>
-            <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="mt-6 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto">
               Train AI on your company's knowledge. Give your team instant answers to any question.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href="#demo"
-                className="inline-flex items-center justify-center py-3 px-6 border-2 border-gray-300 text-gray-900 font-semibold rounded-full hover:bg-white hover:border-gray-400 transition-colors"
+                className="inline-flex items-center justify-center py-2 px-4 md:py-3 md:px-6 text-sm md:text-base border-2 border-slate-500 text-white font-semibold rounded-full hover:bg-slate-700 hover:border-slate-400 transition-colors"
               >
                 Learn more
               </a>
               <a
                 href="https://insight.nnaico.com"
-                className="inline-flex items-center justify-center gap-2 py-3 px-6 bg-primary-600 text-white font-semibold rounded-full hover:bg-primary-700 transition-colors"
+                className="inline-flex items-center justify-center gap-2 py-2 px-4 md:py-3 md:px-6 text-sm md:text-base bg-primary-600 text-white font-semibold rounded-full hover:bg-primary-700 transition-colors"
               >
                 Start free trial
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -122,23 +223,23 @@ export default function Hero() {
                 </svg>
               </a>
             </div>
-            <p className="mt-6 text-sm text-gray-500">
+            <p className="mt-4 text-xs text-slate-400">
               14-day free trial. No credit card required.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Chat Mockup */}
-      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      {/* Chat Mockup - extends beyond hero into next section */}
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 translate-y-24">
         <div className="relative">
           {/* Subtle shadow behind */}
           <div className="absolute -inset-4 bg-primary-200/30 rounded-3xl blur-3xl" />
 
-          {/* Navigation arrows */}
+          {/* Navigation arrows - hidden on mobile */}
           <button
             onClick={goToPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 md:-translate-x-16 w-10 h-10 rounded-full bg-white shadow-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:text-gray-900 hover:shadow-xl transition-all z-10"
+            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 w-10 h-10 rounded-full bg-white shadow-lg border border-gray-200 items-center justify-center text-gray-600 hover:text-gray-900 hover:shadow-xl transition-all z-10"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -146,74 +247,167 @@ export default function Hero() {
           </button>
           <button
             onClick={goToNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 md:translate-x-16 w-10 h-10 rounded-full bg-white shadow-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:text-gray-900 hover:shadow-xl transition-all z-10"
+            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 w-10 h-10 rounded-full bg-white shadow-lg border border-gray-200 items-center justify-center text-gray-600 hover:text-gray-900 hover:shadow-xl transition-all z-10"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
 
+          {/* Conversation label - above chat on mobile */}
+          <div className="flex md:hidden justify-center mb-3">
+            <span className="inline-flex items-center gap-2 text-xs font-medium text-primary-200 bg-primary-900/50 px-3 py-1.5 rounded-full border border-primary-700/30">
+              <span className="w-2 h-2 rounded-full bg-primary-400 animate-pulse" />
+              {currentConvo.label}
+            </span>
+          </div>
+
           {/* Chat frame mockup */}
-          <div className="bg-white rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.1)] overflow-hidden border border-gray-200 relative">
-            {/* Conversation label */}
-            <div className="absolute top-4 left-6 z-10">
-              <span className="inline-flex items-center gap-2 text-xs font-medium text-primary-700 bg-primary-50 px-3 py-1.5 rounded-full">
-                <span className="w-2 h-2 rounded-full bg-primary-500 animate-pulse" />
-                {currentConvo.label}
-              </span>
+          <div
+            className="bg-white rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.15)] overflow-hidden border border-gray-200 relative flex"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            {/* Sidebar - hidden on mobile */}
+            <div className="hidden md:flex flex-col w-56 border-r border-gray-200 bg-gray-50/80">
+              {/* Sidebar header */}
+              <div className="p-3 border-b border-gray-200">
+                <button className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 w-full px-2 py-1.5">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                  New Chat
+                </button>
+              </div>
+
+              {/* Assistants section */}
+              <div className="p-3">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Assistants</span>
+                  <span className="text-xs text-gray-400">Manage</span>
+                </div>
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-gray-200/80 text-sm">
+                    <span className="w-5 h-5 rounded bg-blue-100 flex items-center justify-center text-xs">💬</span>
+                    <span className="text-gray-900 font-medium">Acme Support</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-gray-100 text-sm">
+                    <span className="w-5 h-5 rounded bg-green-100 flex items-center justify-center text-xs">⚡</span>
+                    <span className="text-gray-600">Sales Helper</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-gray-100 text-sm">
+                    <span className="w-5 h-5 rounded bg-purple-100 flex items-center justify-center text-xs">📚</span>
+                    <span className="text-gray-600">HR Assistant</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* History section */}
+              <div className="p-3 flex-1">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">History</span>
+                  <svg className="w-3.5 h-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+                <div className="space-y-0.5 text-sm">
+                  <div className="px-2 py-1.5 rounded-lg bg-gray-200/80">
+                    <p className="text-gray-900 font-medium truncate text-xs">{currentConvo.label}</p>
+                    <p className="text-gray-400 text-xs">Just now</p>
+                  </div>
+                  <div className="px-2 py-1.5 rounded-lg hover:bg-gray-100">
+                    <p className="text-gray-600 truncate text-xs">Refund policy question</p>
+                    <p className="text-gray-400 text-xs">2 hours ago</p>
+                  </div>
+                  <div className="px-2 py-1.5 rounded-lg hover:bg-gray-100">
+                    <p className="text-gray-600 truncate text-xs">Vendor contracts</p>
+                    <p className="text-gray-400 text-xs">Yesterday</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* User */}
+              <div className="p-3 border-t border-gray-200">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full bg-primary-500 flex items-center justify-center text-white text-xs font-medium">A</div>
+                  <span className="text-sm text-gray-700">Admin</span>
+                </div>
+              </div>
             </div>
 
             {/* Chat content */}
-            <div className="p-8 md:p-10 pt-14 bg-gradient-to-b from-gray-50 to-white">
+            <div className="flex-1 flex flex-col p-4 md:p-5 lg:p-6 bg-white">
               {/* Messages area */}
-              <div key={activeIndex} className="min-h-[400px] space-y-6 animate-[fadeIn_0.5s_ease-out]">
+              <div
+                key={activeIndex}
+                className={`flex-1 min-h-[380px] md:min-h-[440px] space-y-4 md:space-y-6 ${isExiting ? 'animate-[fadeOut_0.3s_ease-out_forwards]' : ''}`}
+              >
                 {/* User message */}
-                <div className="flex justify-end">
-                  <div className="max-w-[75%] bg-primary-600 rounded-2xl rounded-tr-sm px-6 py-4 shadow-[0_4px_20px_rgba(37,99,235,0.3)]">
-                    <p className="text-sm text-white font-medium">{currentConvo.user}</p>
+                <div
+                  className="flex justify-end animate-[fadeIn_0.4s_ease-out_forwards] opacity-0"
+                  style={{ animationDelay: '0s' }}
+                >
+                  <div className="max-w-[85%] md:max-w-[75%] bg-gray-100 rounded-3xl px-4 py-3 md:px-5 md:py-3">
+                    <p className="text-sm md:text-base text-gray-900">{currentConvo.user}</p>
                   </div>
                 </div>
 
                 {/* Assistant message */}
-                <div className="flex justify-start">
-                  <div className="max-w-[85%] flex gap-4">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-cyan-500 flex items-center justify-center shadow-lg">
-                      <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                    </div>
-                    <div className="flex-1 bg-white rounded-2xl rounded-tl-sm p-6 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-gray-100">
-                      <p className="text-sm text-gray-700 whitespace-pre-line leading-relaxed">
-                        {currentConvo.assistant}
-                      </p>
-                    </div>
+                <div
+                  className="flex justify-start animate-[fadeIn_0.4s_ease-out_forwards] opacity-0"
+                  style={{ animationDelay: '0.3s' }}
+                >
+                  <div className="max-w-[95%] md:max-w-[90%]">
+                    {isTyping ? (
+                      <div className="flex items-center gap-1 py-2">
+                        <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                        <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                        <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                      </div>
+                    ) : (
+                      <div className="text-sm md:text-base text-gray-700 whitespace-pre-wrap leading-relaxed">
+                        {currentConvo.assistant.split('\n').map((line, lineIndex) => (
+                          <span key={lineIndex}>
+                            {lineIndex > 0 && '\n'}
+                            <AnimatedText text={line} isFirstLine={lineIndex === 0} />
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
 
               {/* Input field */}
-              <div className="mt-6 flex items-center gap-3 bg-gray-50 rounded-xl px-5 py-4 border border-gray-200">
-                <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-                <span className="text-sm text-gray-400 flex-1">Ask anything about your company...</span>
-                <div className="w-8 h-8 rounded-lg bg-gray-300 flex items-center justify-center">
-                  <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              <div className="flex mt-auto pt-2 items-center gap-2 bg-white rounded-full px-3 py-2 border border-gray-200 shadow-sm">
+                <button className="text-gray-400 hover:text-gray-600">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                   </svg>
-                </div>
+                </button>
+                <span className="text-sm text-gray-400 flex-1">Type your message...</span>
+                <button className="hidden md:block text-gray-400 hover:text-gray-600">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                  </svg>
+                </button>
+                <button className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-orange-400">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
 
           {/* Conversation indicators */}
-          <div className="flex justify-center gap-2 mt-6">
+          <div className="flex justify-center gap-2 mt-4 pb-4">
             {conversations.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToIndex(index)}
                 className={`w-2 h-2 rounded-full transition-all ${
-                  index === activeIndex ? 'bg-primary-600 w-6' : 'bg-gray-300 hover:bg-gray-400'
+                  index === activeIndex ? 'bg-primary-400 w-6' : 'bg-slate-600 hover:bg-slate-500'
                 }`}
               />
             ))}

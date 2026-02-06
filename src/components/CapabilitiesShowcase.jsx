@@ -166,13 +166,13 @@ export default function CapabilitiesShowcase() {
   const activeCapability = capabilities.find(c => c.id === activeTab)
 
   return (
-    <section id="demo" className="py-16 md:py-24 lg:py-32 bg-white">
+    <section id="demo" className="py-16 md:py-24 lg:py-32 bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
             See What Nnaico Can Do
           </h2>
-          <p className="mt-4 text-lg text-gray-600">
+          <p className="mt-4 text-lg text-slate-400">
             More than just chat — your assistant can take action.
           </p>
         </div>
@@ -187,13 +187,13 @@ export default function CapabilitiesShowcase() {
                 className={`text-left rounded-xl p-4 transition-all ${
                   activeTab === cap.id
                     ? 'bg-primary-600 text-white shadow-lg ring-2 ring-primary-300'
-                    : 'bg-gray-50 hover:bg-gray-100 text-gray-900'
+                    : 'bg-slate-800 hover:bg-slate-700 text-white'
                 }`}
               >
                 <div className={`inline-flex items-center justify-center w-10 h-10 rounded-lg mb-3 ${
                   activeTab === cap.id
                     ? 'bg-white/20 text-white'
-                    : 'bg-primary-100 text-primary-600'
+                    : 'bg-slate-700 text-primary-400'
                 }`}>
                   {cap.icon}
                 </div>
@@ -201,7 +201,7 @@ export default function CapabilitiesShowcase() {
                   {cap.title}
                 </h3>
                 <p className={`text-xs ${
-                  activeTab === cap.id ? 'text-white/80' : 'text-gray-500'
+                  activeTab === cap.id ? 'text-white/80' : 'text-slate-400'
                 }`}>
                   {cap.description}
                 </p>
@@ -211,12 +211,17 @@ export default function CapabilitiesShowcase() {
 
           {/* Right: Chat Mockup */}
           <div className="lg:sticky lg:top-24">
-            <ChatMockup
-              conversation={activeCapability.conversation}
-              minimal
-              hasChart={activeCapability.conversation.some(m => m.hasChart)}
-              hasDownload={activeCapability.conversation.some(m => m.hasDownload)}
-            />
+            <div
+              key={activeTab}
+              className="animate-[fadeIn_0.4s_ease-out]"
+            >
+              <ChatMockup
+                conversation={activeCapability.conversation}
+                minimal
+                hasChart={activeCapability.conversation.some(m => m.hasChart)}
+                hasDownload={activeCapability.conversation.some(m => m.hasDownload)}
+              />
+            </div>
           </div>
         </div>
       </div>
