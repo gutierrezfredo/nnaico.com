@@ -9,183 +9,185 @@ const useCases = [
     gradient: "from-blue-400 to-indigo-500",
     sidebar: {
       assistants: [
-        { name: 'HR Assistant', icon: '📚', bgColor: 'bg-purple-100', active: true },
+        { name: 'Team Training', icon: '📚', bgColor: 'bg-purple-100', active: true },
         { name: 'IT Help', icon: '💻', bgColor: 'bg-blue-100', active: false }
       ],
       history: [
-        { label: 'Expense reports', time: 'Just now', active: true },
-        { label: 'Benefits enrollment', time: '2 hours ago', active: false }
+        { label: 'Opening procedures', time: 'Just now', active: true },
+        { label: 'Clock in help', time: '2 hours ago', active: false }
       ]
     },
     conversation: [
       {
         role: 'user',
-        text: "I'm new here - how do I submit expense reports?"
+        text: "It's my first day - what do I need to do before we open?"
       },
       {
         role: 'assistant',
-        text: `Welcome to the team! Here's how to submit expenses:
+        text: `Welcome to the team! Here's the opening checklist:
 
-1. Log into Workday (HR portal)
-2. Go to Expenses > Create Report
-3. Upload receipts (photo or PDF)
-4. Select expense category
-5. Submit for manager approval
+1. Arrive 15 min before your shift
+2. Clock in at the back terminal
+3. Check the daily notes board
+4. Restock supplies if running low
+5. Unlock the front door at 9am
 
-Tip: Submit within 30 days of purchase.
-Need the Workday login link?`
+Pro tip: Ask Maria if you need help - she usually opens.`
       },
       {
         role: 'user',
-        text: "Yes please, and who approves my expenses?"
+        text: "Where do I find the daily notes board?"
       },
       {
         role: 'assistant',
-        text: `Here's your Workday link: workday.acme.com
+        text: `The daily notes board is in the break room, on the wall next to the schedule.
 
-Your expense approver is Lisa Chen (your direct manager). She typically approves within 48 hours.
+It has updates from management, any specials for the day, and things to watch out for.
 
-I've also sent you the full Expense Policy PDF to your email!`
+I can also send you reminders each morning if you'd like!`
       }
     ]
   },
   {
     id: 'sales',
-    title: "Sales Enablement",
-    description: "Close deals faster with instant intel",
+    title: "Sales Insights",
+    description: "Your CRM data, in plain English",
     gradient: "from-cyan-400 to-blue-500",
     image: "/images/use-case-sales.png",
     sidebar: {
       assistants: [
-        { name: 'Sales Helper', icon: '⚡', bgColor: 'bg-green-100', active: true },
-        { name: 'Product Info', icon: '📦', bgColor: 'bg-orange-100', active: false }
+        { name: 'Sales Intel', icon: '📊', bgColor: 'bg-green-100', active: true },
+        { name: 'CRM Helper', icon: '💼', bgColor: 'bg-orange-100', active: false }
       ],
       history: [
-        { label: 'Pricing comparison', time: 'Just now', active: true },
-        { label: 'Case studies', time: '1 hour ago', active: false }
+        { label: 'Q1 performance', time: 'Just now', active: true },
+        { label: 'Pipeline review', time: '1 hour ago', active: false }
       ]
     },
     conversation: [
       {
         role: 'user',
-        text: "What's our pricing vs CompetitorX?"
+        text: "What's our sales performance looking like this month?"
       },
       {
         role: 'assistant',
-        text: `Here's the comparison:
+        text: `Here's your February snapshot:
 
-Nnaico vs CompetitorX:
-• Base price: $150 vs $200/mo
-• Users included: Unlimited vs 10 users
-• Storage: 1GB vs 500MB
-• Self-hosted option: Yes vs No
+• Revenue: $142k (89% of target)
+• Deals closed: 23
+• Pipeline: $380k in active opportunities
+• Top performer: Sarah - $48k closed
 
-Key differentiator: We don't charge per user.
-Want the full competitive battlecard?`
+You're $18k short of target with 8 days left. Want me to show deals likely to close this week?`
       },
       {
         role: 'user',
-        text: "Yes, send me the battlecard"
+        text: "Yes, and which deals are at risk?"
       },
       {
         role: 'assistant',
-        text: `Done! I've sent the CompetitorX Battlecard to your email (sarah@acme.com).
+        text: `Deals likely to close this week:
+• Acme Corp - $12k (contract sent)
+• TechStart - $8k (verbal yes)
 
-It includes objection handling and customer win stories.
+At-risk deals:
+• BuildRight - $15k (no response in 14 days)
+• DataFlow - $9k (asked for discount)
 
-Good luck with the pitch! Let me know how it goes.`
+I'd prioritize following up with BuildRight today - that could make your month.`
       }
     ]
   },
   {
     id: 'knowledge',
-    title: "Knowledge Base",
-    description: "Any question, instant answer",
+    title: "Instant Answers",
+    description: "No more hunting for info",
     gradient: "from-emerald-400 to-teal-500",
     image: "/images/use-case-knowledge.png",
     sidebar: {
       assistants: [
-        { name: 'Company Wiki', icon: '📖', bgColor: 'bg-emerald-100', active: true },
-        { name: 'Policy Guide', icon: '📋', bgColor: 'bg-gray-100', active: false }
+        { name: 'Company Guide', icon: '📖', bgColor: 'bg-emerald-100', active: true },
+        { name: 'Policies', icon: '📋', bgColor: 'bg-gray-100', active: false }
       ],
       history: [
-        { label: 'PTO request', time: 'Just now', active: true },
-        { label: 'Meeting rooms', time: '3 hours ago', active: false }
+        { label: 'Return process', time: 'Just now', active: true },
+        { label: 'Discount rules', time: '3 hours ago', active: false }
       ]
     },
     conversation: [
       {
         role: 'user',
-        text: "What's the process for requesting PTO?"
+        text: "Customer wants to return something without a receipt. What do I do?"
       },
       {
         role: 'assistant',
-        text: `Here's the PTO request process:
+        text: `For returns without receipt:
 
-1. Submit in Workday (HR > Time Off)
-2. Select PTO type and dates
-3. Manager approves within 48 hours
-4. Calendar blocks automatically
+1. Ask for their ID (required)
+2. Look up purchase by card or phone number
+3. If found: process normal return
+4. If not found: store credit only, max $50
 
-Reminder: Submit 2+ weeks ahead for trips over 5 days.
-Current PTO balance: Check Workday dashboard.`
+Need manager approval if item is over $100.`
       },
       {
         role: 'user',
-        text: "Can you submit PTO for next Friday?"
+        text: "They're upset about the $50 limit. Can I make an exception?"
       },
       {
         role: 'assistant',
-        text: `Done! I've submitted a PTO request for Friday, Feb 14th.
+        text: `For exceptions over $50:
 
-Your manager (David) will be notified and typically approves within 24 hours.
+• Call the manager on duty for approval
+• They can authorize up to $100 for store credit
+• Document the exception in the return notes
 
-I'll let you know once it's approved!`
+Tip: Offer to look up their purchase history - sometimes we can find it with their name.`
       }
     ]
   },
   {
     id: 'support',
     title: "Customer Support",
-    description: "Instant answers for customers",
+    description: "Answer customers 24/7",
     gradient: "from-violet-400 to-purple-500",
     image: "/images/use-case-support.png",
     sidebar: {
       assistants: [
-        { name: 'Support Bot', icon: '💬', bgColor: 'bg-violet-100', active: true },
-        { name: 'Returns', icon: '↩️', bgColor: 'bg-red-100', active: false }
+        { name: 'Support', icon: '💬', bgColor: 'bg-violet-100', active: true },
+        { name: 'Products', icon: '📦', bgColor: 'bg-red-100', active: false }
       ],
       history: [
-        { label: 'Return policy', time: 'Just now', active: true },
-        { label: 'Shipping info', time: '30 min ago', active: false }
+        { label: 'Order status', time: 'Just now', active: true },
+        { label: 'Product question', time: '30 min ago', active: false }
       ]
     },
     conversation: [
       {
         role: 'user',
-        text: "What's your return policy for opened items?"
+        text: "Hi, I ordered last week and haven't received anything yet"
       },
       {
         role: 'assistant',
-        text: `For opened items, here's our policy:
+        text: `I'm sorry about the delay! Let me help.
 
-• Electronics: 14-day return, must be in original packaging
-• Clothing: 30-day return, unworn with tags
-• Food items: Non-returnable once opened
+Could you share your order number? It starts with # and is in your confirmation email.
 
-Would you like me to start a return for you?`
+Or I can look it up with the email address you used to order.`
       },
       {
         role: 'user',
-        text: "Yes, start the return please"
+        text: "It's order #4521"
       },
       {
         role: 'assistant',
-        text: `Done! Return #4521 has been created.
+        text: `Found it! Order #4521 shipped on Monday and is currently in transit.
 
-A shipping label has been sent to your email. Just drop it off at any UPS location within 7 days.
+Tracking shows delivery expected tomorrow by 6pm.
 
-Anything else I can help with?`
+Here's your tracking link: track.carrier.com/4521
+
+Want me to send you text updates when it's out for delivery?`
       }
     ]
   }
@@ -208,9 +210,41 @@ export default function UseCases() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-[500px_1fr] gap-6 items-stretch">
-          {/* Left: Image selection tiles */}
-          <div className="grid grid-cols-2 gap-4 content-start">
+        <div className="grid lg:grid-cols-[500px_1fr] gap-3 lg:gap-6 items-stretch">
+          {/* Mobile: Horizontal scroll tiles */}
+          <div className="lg:hidden overflow-hidden">
+            <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory touch-pan-x overscroll-x-contain scrollbar-hide">
+              {useCases.map((useCase) => (
+                <button
+                  key={useCase.id}
+                  onClick={() => setActiveCase(useCase.id)}
+                  className={`relative rounded-lg p-3 text-left transition-all overflow-hidden flex-shrink-0 w-36 h-28 snap-start border-2 ${
+                    activeCase === useCase.id
+                      ? 'border-primary-500'
+                      : 'border-transparent'
+                  }`}
+                >
+                  <img
+                    src={useCase.image || "/images/use-cases-bg.avif"}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  {activeCase === useCase.id && (
+                    <div className={`absolute inset-0 bg-gradient-to-br ${useCase.gradient} opacity-50`} />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+                  <div className="absolute bottom-3 left-3 right-3 z-10">
+                    <h3 className="text-sm font-bold text-white leading-tight">
+                      {useCase.title}
+                    </h3>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop: Image selection tiles */}
+          <div className="hidden lg:grid grid-cols-2 gap-4 content-start">
             {useCases.map((useCase) => (
               <button
                 key={useCase.id}

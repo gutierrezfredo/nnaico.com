@@ -4,146 +4,163 @@ import { FloatingShapes } from './ui/ElegantShapes'
 
 const assistants = [
   {
-    id: 'support',
-    name: 'Acme Support',
-    icon: '💬',
-    bgColor: 'bg-blue-100',
+    id: 'training',
+    name: 'Team Training',
+    icon: '📚',
+    bgColor: 'bg-purple-100',
     conversations: [
       {
-        label: "Vendor contracts",
-        user: "Who handles vendor contracts and what's the approval process?",
-        assistant: `Sarah Chen in Operations handles all vendor contracts.
+        label: "New hire question",
+        user: "It's my first day - what's the opening procedure?",
+        assistant: `Welcome to the team! Here's the opening checklist:
 
-Approval process:
-1. Submit Vendor Request Form
-2. Sarah reviews within 48 hours
-3. Legal review if contract > $10k
-4. Finance approval for budget
+1. Arrive 15 min before shift
+2. Clock in at the back terminal
+3. Check the daily notes board
+4. Restock supplies if needed
+5. Unlock front door at 9am sharp
 
-Need the request form? I can send you the link.`
+Pro tip: Maria usually opens Mon/Wed - she's great to shadow.
+
+Want me to send you the full training guide?`
       },
       {
-        label: "Refund policy",
-        user: "What's our refund policy for enterprise customers?",
-        assistant: `Enterprise refund policy:
+        label: "Process question",
+        user: "How do I process a return without a receipt?",
+        assistant: `For returns without receipt:
 
-• 30-day money-back guarantee (no questions)
-• Pro-rated refunds after 30 days
-• Annual contracts: refund unused months
-• Setup fees are non-refundable
+1. Ask for ID (required)
+2. Look up purchase in system by card or phone
+3. If found: process normal return
+4. If not found: store credit only, max $50
 
-For refunds over $5k, loop in finance@acme.com
+Manager approval needed if:
+• Item over $100
+• Customer disputes policy
 
-Source: Enterprise Terms (updated Jan 2026)`
+The full return policy is in the Staff Handbook, Section 4.`
       },
       {
-        label: "Password reset",
-        user: "How do I reset my company email password?",
-        assistant: `To reset your email password:
+        label: "Equipment help",
+        user: "The POS system is showing an error - what do I do?",
+        assistant: `For POS errors, try this first:
 
-1. Go to portal.acme.com/reset
-2. Enter your work email
-3. Check for reset link (also check spam)
-4. Create new password (min 12 chars)
+1. Note the error code (take a photo)
+2. Press Cancel and retry the transaction
+3. If still failing: restart terminal (hold power 10 sec)
 
-If locked out, contact IT at it-help@acme.com or ext. 4357.`
+Common fixes:
+• "Connection error" → check WiFi on back screen
+• "Card read fail" → clean the chip reader
+
+Still stuck? Call tech support: 555-0123 (open 24/7)`
       }
     ]
   },
   {
     id: 'sales',
-    name: 'Sales Helper',
-    icon: '⚡',
+    name: 'Sales Insights',
+    icon: '📊',
     bgColor: 'bg-green-100',
     conversations: [
       {
-        label: "CompetitorX comparison",
-        user: "Prospect asked why we're better than CompetitorX - quick talking points?",
-        assistant: `Key differentiators vs CompetitorX:
+        label: "Performance check",
+        user: "How are we doing on sales this month?",
+        assistant: `Here's your February snapshot:
 
-✓ Unlimited users (they charge per seat)
-✓ Self-hosted option (they're cloud-only)
-✓ Custom AI training (they use generic models)
-✓ 99.9% uptime SLA (they offer 99.5%)
+• Revenue: $142k (89% of $160k target)
+• Deals closed: 23
+• Avg deal size: $6,174
+• Top seller: Sarah - $48k closed
 
-Price comparison: We're $150/mo vs their $200/mo
+You're $18k short with 8 days left. The Acme Corp deal ($12k) should close this week.
 
-Want the full battlecard PDF?`
+Want to see the full pipeline breakdown?`
       },
       {
-        label: "Enterprise pricing",
-        user: "Client asking for enterprise discount - what can we offer?",
-        assistant: `Enterprise discount guidelines:
+        label: "Product insights",
+        user: "What products are selling best this quarter?",
+        assistant: `Top 5 products in Q1:
 
-• 10-49 seats: 10% off annual
-• 50-99 seats: 15% off annual
-• 100+ seats: 20% off + dedicated CSM
+1. Pro Bundle - $89k (142 units)
+2. Starter Kit - $52k (312 units)
+3. Enterprise License - $45k (9 deals)
+4. Add-on Pack - $28k (89 units)
+5. Training Package - $18k (23 sold)
 
-For deals over $50k ARR, you can also offer:
-• Free onboarding ($2k value)
-• Extended trial (30 days)
+Pro Bundle is up 34% from last quarter. Starter Kit has the highest volume but lowest margin.
 
-Need VP approval for anything beyond this.`
+Want me to compare this to Q4?`
       },
       {
-        label: "Case study request",
-        user: "Do we have a case study for fintech companies?",
-        assistant: `Yes! We have 2 fintech case studies:
+        label: "Team performance",
+        user: "Which sales reps are behind target?",
+        assistant: `Reps below 80% of target:
 
-1. PayFlow Inc - 40% faster onboarding
-2. TrustBank - $200k saved in support costs
+• Jason M. - 62% ($31k of $50k)
+  → Low activity: only 12 calls this week
+• Maria L. - 74% ($37k of $50k)
+  → Pipeline is healthy, deals stuck in negotiation
 
-Both are in the Sales Drive under Case Studies > Fintech.
+Top performers (over 100%):
+• Sarah T. - 128% ($48k)
+• David R. - 108% ($43k)
 
-Want me to send you the links or draft an intro email for your prospect?`
+I'd check in with Jason - his activity dropped after the team meeting.`
       }
     ]
   },
   {
-    id: 'hr',
-    name: 'HR Assistant',
-    icon: '📚',
-    bgColor: 'bg-purple-100',
+    id: 'support',
+    name: 'Customer Support',
+    icon: '💬',
+    bgColor: 'bg-blue-100',
     conversations: [
       {
-        label: "Expense reports",
-        user: "I'm new here - how do I submit expense reports?",
-        assistant: `Welcome to the team! Here's how to submit expenses:
+        label: "Product question",
+        user: "Customer asking if the Pro model works with their setup",
+        assistant: `The Pro model is compatible with:
 
-1. Log into Workday (HR portal)
-2. Go to Expenses > Create Report
-3. Upload receipts (photo or PDF)
-4. Select expense category
-5. Submit for manager approval
+✓ All standard mounts (2019+)
+✓ Both 110V and 220V power
+✓ iOS and Android apps
+✗ NOT compatible with legacy Gen 1 systems
 
-Tip: Submit within 30 days of purchase. Need the Workday link?`
+If they have Gen 1, offer the adapter kit ($29) or trade-in discount.
+
+Want me to pull up the full compatibility chart?`
       },
       {
-        label: "PTO balance",
-        user: "How many PTO days do I have left this year?",
-        assistant: `You can check your PTO balance in Workday:
+        label: "Policy question",
+        user: "What's our warranty policy? Customer's unit stopped working.",
+        assistant: `Warranty coverage:
 
-1. Log in to workday.acme.com
-2. Go to Time Off > My Balance
+• 1 year standard (from purchase date)
+• 2 years if registered within 30 days
+• Covers defects, NOT physical damage
 
-Quick note: Unused PTO rolls over up to 5 days. Use-it-or-lose-it deadline is Dec 31.
+For warranty claims:
+1. Get their order # or serial number
+2. Create ticket in the support portal
+3. We ship replacement within 3-5 days
 
-Want me to show you how to request time off?`
+Out of warranty? Offer 20% off replacement.`
       },
       {
-        label: "Benefits enrollment",
-        user: "When is open enrollment and what are my options?",
-        assistant: `Open enrollment runs Nov 1-15.
+        label: "Complaint handling",
+        user: "Angry customer says they've been waiting 2 weeks for their order",
+        assistant: `For delayed orders:
 
-Your options:
-• Health: PPO, HMO, or HDHP with HSA
-• Dental: Basic or Premium
-• Vision: Optional add-on ($8/mo)
-• 401k: Up to 6% match
+1. Apologize sincerely (don't make excuses)
+2. Look up order status in the system
+3. If shipping issue: offer to reship priority (free)
+4. Offer 15% off next order as goodwill
 
-New this year: Mental health stipend ($500/yr)
+If order is lost:
+• Full refund OR immediate reship
+• Add $10 credit to their account
 
-I can send you the full benefits guide!`
+Log all complaints in the feedback tracker.`
       }
     ]
   }
@@ -465,7 +482,7 @@ export default function Hero() {
               {/* Messages area */}
               <div
                 key={`${activeAssistantIndex}-${activeConvoIndex}`}
-                className={`flex-1 min-h-[380px] md:min-h-[440px] space-y-4 md:space-y-6 ${isExiting ? 'animate-[fadeOut_0.3s_ease-out_forwards]' : ''}`}
+                className={`flex-1 min-h-[420px] md:min-h-[500px] space-y-4 md:space-y-6 ${isExiting ? 'animate-[fadeOut_0.3s_ease-out_forwards]' : ''}`}
               >
                 {/* User message */}
                 <div

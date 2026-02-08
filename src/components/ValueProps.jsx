@@ -6,8 +6,8 @@ const leftCards = [
     bgColor: "bg-gradient-to-tl from-indigo-100 via-white via-70% to-white",
     iconColor: "text-indigo-300",
     icon: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 2l5 5h-5V4zM8 12h8v2H8v-2zm0 4h8v2H8v-2z" />
       </svg>
     )
   },
@@ -18,8 +18,8 @@ const leftCards = [
     bgColor: "bg-gradient-to-tl from-orange-100 via-white via-70% to-white",
     iconColor: "text-orange-300",
     icon: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 2C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17a1 1 0 001 1h6a1 1 0 001-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zM9 21a1 1 0 001 1h4a1 1 0 001-1v-1H9v1z" />
       </svg>
     )
   }
@@ -30,8 +30,8 @@ const rightCard = {
   description: "No more searching through Drive, Notion, Slack, and email. One place to ask anything.",
   iconColor: "text-sky-300",
   icon: (
-    <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
     </svg>
   )
 }

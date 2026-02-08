@@ -4,31 +4,33 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
-          <div className="md:col-span-2">
-            <img src="/logo.png" alt="Nnaico" className="h-8 mb-4 brightness-0 invert" />
-            <p className="text-sm max-w-md">
+          <div className="md:col-span-2 text-center md:text-left">
+            <img src="/logo.png" alt="Nnaico" className="h-8 mb-4 brightness-0 invert mx-auto md:mx-0" />
+            <p className="text-sm max-w-md mx-auto md:mx-0">
               AI assistants that actually know your business. Turn your company's knowledge into instant answers for your team and customers.
             </p>
           </div>
 
           {/* Product */}
-          <div>
+          <div className="text-center md:text-left">
             <h3 className="text-white font-semibold mb-4">Product</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#features" className="hover:text-white transition-colors">Features</a></li>
-              <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
-              <li><a href="#demo" className="hover:text-white transition-colors">Demo</a></li>
+              <li><a href="/" className="hover:text-white transition-colors">Overview</a></li>
+              <li><a href="/pricing" className="hover:text-white transition-colors">Pricing</a></li>
+              <li><a href="/demo" className="hover:text-white transition-colors">Book a Demo</a></li>
               <li><a href="https://insight.nnaico.com" className="hover:text-white transition-colors">Sign In</a></li>
             </ul>
           </div>
 
           {/* Company */}
-          <div>
+          <div className="text-center md:text-left">
             <h3 className="text-white font-semibold mb-4">Company</h3>
             <ul className="space-y-2 text-sm">
+              <li><a href="/about" className="hover:text-white transition-colors">About</a></li>
               <li><a href="mailto:hello@nnaico.com" className="hover:text-white transition-colors">Contact</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+              <li><a href="/security" className="hover:text-white transition-colors">Security</a></li>
+              <li><a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a href="/terms" className="hover:text-white transition-colors">Terms of Service</a></li>
             </ul>
           </div>
         </div>

@@ -5,42 +5,46 @@ const capabilities = [
   {
     id: 'memory',
     title: 'Memory',
-    description: 'Remembers important details across conversations',
+    description: 'Remembers customer and team details',
     icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.5c-2 0-3.5.8-4.2 2.2-.5 1-1.3 1.3-2.3 1.8-1.2.6-2 1.8-2 3.2 0 1.2.6 2.2 1.5 2.8.6.4 1 1 1 1.8 0 1.8 1.2 3.2 3 3.7.8.2 1.2.7 1.5 1.2.2.5.8.8 1.5.8s1.3-.3 1.5-.8c.3-.5.7-1 1.5-1.2 1.8-.5 3-1.9 3-3.7 0-.8.4-1.4 1-1.8.9-.6 1.5-1.6 1.5-2.8 0-1.4-.8-2.6-2-3.2-1-.5-1.8-.8-2.3-1.8-.7-1.4-2.2-2.2-4.2-2.2z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.5v15" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9c1 .5 2.5.5 4 0M8 13c1.5 1 3.5 1 5 0" />
       </svg>
     ),
     sidebar: {
       assistants: [
-        { name: 'Scheduler', icon: '📅', bgColor: 'bg-blue-100', active: true },
-        { name: 'Notes', icon: '📝', bgColor: 'bg-yellow-100', active: false }
+        { name: 'Customer Info', icon: '👤', bgColor: 'bg-blue-100', active: true },
+        { name: 'Team Notes', icon: '📝', bgColor: 'bg-yellow-100', active: false }
       ],
       history: [
-        { label: 'Team preferences', time: 'Just now', active: true },
-        { label: 'Meeting notes', time: 'Yesterday', active: false }
+        { label: 'VIP preferences', time: 'Just now', active: true },
+        { label: 'Allergy notes', time: 'Yesterday', active: false }
       ]
     },
     conversation: [
-      { role: 'user', text: 'Remember that Sarah prefers morning meetings and John is out every Friday' },
-      { role: 'assistant', text: `Got it! I've saved these preferences:
+      { role: 'user', text: 'The Hendersons are coming in tonight - do we have any notes on them?' },
+      { role: 'assistant', text: `Yes! Here's what I have on the Hendersons:
 
-• Sarah: Prefers morning meetings
-• John: Out every Friday
+• VIP customers (12 visits this year)
+• Mrs. Henderson has a shellfish allergy
+• They prefer booth 7 by the window
+• Usually order the house red
 
-I'll keep these in mind for scheduling.` },
-      { role: 'user', text: 'Schedule a team sync with Sarah and John' },
-      { role: 'assistant', text: `Based on their preferences, I suggest:
+Last visit: Jan 15 - left a 25% tip for Mike.` },
+      { role: 'user', text: 'Great, also note that Mr. Henderson just had a birthday' },
+      { role: 'assistant', text: `Got it! I've added:
 
-Tuesday 9:30 AM — Works for Sarah (morning) and John (not Friday).
+• Mr. Henderson: Birthday in February
 
-Want me to send the calendar invite?` }
+I'll remind you next year. Want me to flag them for a complimentary dessert tonight?` }
     ]
   },
   {
     id: 'charts',
     title: 'Charts',
-    description: 'Generate visual data representations instantly',
+    description: 'Visualize your sales and performance data',
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -52,23 +56,27 @@ Want me to send the calendar invite?` }
         { name: 'Sales Data', icon: '💰', bgColor: 'bg-green-100', active: false }
       ],
       history: [
-        { label: 'Sales by region', time: 'Just now', active: true },
-        { label: 'Q4 metrics', time: '2 days ago', active: false }
+        { label: 'Weekly sales', time: 'Just now', active: true },
+        { label: 'Best sellers', time: '2 days ago', active: false }
       ]
     },
     conversation: [
-      { role: 'user', text: 'Show me our sales by region as a chart' },
-      { role: 'assistant', text: 'Here\'s your sales breakdown by region:', hasChart: true },
-      { role: 'user', text: 'Which region needs attention?' },
-      { role: 'assistant', text: `South region is underperforming at 45% of target.
+      { role: 'user', text: 'Show me sales by day of week for this month' },
+      { role: 'assistant', text: 'Here\'s your sales by day of week:', hasChart: true },
+      { role: 'user', text: 'Why is Tuesday so low?' },
+      { role: 'assistant', text: `Looking at the data, Tuesday has:
 
-I can pull the South team's pipeline report or schedule a review with the regional manager. What would help?` }
+• 40% less foot traffic than average
+• No promotions running
+• Competitor runs "Taco Tuesday" specials
+
+Idea: Consider a Tuesday special to boost traffic. Want me to pull what sold best on slower days?` }
     ]
   },
   {
     id: 'export',
     title: 'File Export',
-    description: 'Export data to Excel, PDF, and more',
+    description: 'Export reports to Excel, PDF, and more',
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -80,23 +88,27 @@ I can pull the South team's pipeline report or schedule a review with the region
         { name: 'Data Export', icon: '📤', bgColor: 'bg-cyan-100', active: false }
       ],
       history: [
-        { label: 'Support tickets', time: 'Just now', active: true },
-        { label: 'Monthly report', time: 'Last week', active: false }
+        { label: 'Inventory report', time: 'Just now', active: true },
+        { label: 'Sales summary', time: 'Last week', active: false }
       ]
     },
     conversation: [
-      { role: 'user', text: 'Export last month\'s support tickets to Excel' },
-      { role: 'assistant', text: 'I\'ve generated your Excel file with 147 support tickets from January 2026.', hasDownload: true },
-      { role: 'user', text: 'Can you also send this to the support team?' },
-      { role: 'assistant', text: `Done! I've emailed the report to support-team@acme.com.
+      { role: 'user', text: 'Export this month\'s inventory report to Excel' },
+      { role: 'assistant', text: 'I\'ve generated your Excel file with 234 items and current stock levels.', hasDownload: true },
+      { role: 'user', text: 'Can you highlight items running low?' },
+      { role: 'assistant', text: `Done! I've added a "Low Stock" column highlighting 12 items below reorder threshold:
 
-I can also set this up as a weekly automated report. Want me to schedule it?` }
+• Paper towels (15% remaining)
+• Sanitizer (22% remaining)
+• Receipt paper (18% remaining)
+
+Want me to auto-generate a reorder list?` }
     ]
   },
   {
     id: 'search',
     title: 'Web Search',
-    description: 'Search the web for real-time information',
+    description: 'Research competitors and suppliers',
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -105,36 +117,38 @@ I can also set this up as a weekly automated report. Want me to schedule it?` }
     sidebar: {
       assistants: [
         { name: 'Research', icon: '🔍', bgColor: 'bg-sky-100', active: true },
-        { name: 'News Feed', icon: '📰', bgColor: 'bg-gray-100', active: false }
+        { name: 'Competitors', icon: '🏪', bgColor: 'bg-gray-100', active: false }
       ],
       history: [
-        { label: 'AI trends', time: 'Just now', active: true },
-        { label: 'Market analysis', time: '3 hours ago', active: false }
+        { label: 'Supplier pricing', time: 'Just now', active: true },
+        { label: 'Competitor hours', time: '3 hours ago', active: false }
       ]
     },
     conversation: [
-      { role: 'user', text: 'What are the latest industry trends in AI customer service?' },
-      { role: 'assistant', text: `Based on recent articles and reports:
+      { role: 'user', text: 'What are competitors charging for similar services in our area?' },
+      { role: 'assistant', text: `I found 4 competitors within 10 miles:
 
-• 67% of customers prefer AI for simple inquiries (Gartner, Jan 2026)
-• Voice AI adoption up 40% year-over-year
-• Top trend: Hybrid AI + human handoff models
+• MainStreet Co: $45-65 (similar quality)
+• Budget Place: $30-40 (lower quality)
+• Premium Shop: $80-95 (high-end)
+• QuickServe: $50-60 (similar to us)
 
-Want me to compile a summary report for your team?` },
-      { role: 'user', text: 'Yes, include competitor moves too' },
-      { role: 'assistant', text: `I'm compiling the report now with:
+You're priced at $55 avg - right in the middle. Want a detailed breakdown?` },
+      { role: 'user', text: 'What about their hours?' },
+      { role: 'assistant', text: `Competitor hours:
 
-• Industry trends & statistics
-• Competitor AI initiatives
-• Recommended action items
+• MainStreet Co: 9am-7pm (closed Sun)
+• Budget Place: 8am-8pm daily
+• Premium Shop: 10am-6pm (closed Sun-Mon)
+• QuickServe: 7am-9pm daily
 
-I'll have it in your inbox within 10 minutes.` }
+You're open 9am-6pm. Extending to 8pm could capture after-work traffic.` }
     ]
   },
   {
     id: 'reports',
     title: 'Reports',
-    description: 'Get insights on what your customers are asking',
+    description: 'See what customers are asking about',
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -143,35 +157,39 @@ I'll have it in your inbox within 10 minutes.` }
     sidebar: {
       assistants: [
         { name: 'Insights', icon: '💡', bgColor: 'bg-amber-100', active: true },
-        { name: 'Dashboard', icon: '📈', bgColor: 'bg-teal-100', active: false }
+        { name: 'Feedback', icon: '📈', bgColor: 'bg-teal-100', active: false }
       ],
       history: [
-        { label: 'Weekly topics', time: 'Just now', active: true },
-        { label: 'Customer feedback', time: 'Yesterday', active: false }
+        { label: 'Top questions', time: 'Just now', active: true },
+        { label: 'Complaints', time: 'Yesterday', active: false }
       ]
     },
     conversation: [
       { role: 'user', text: 'What are customers asking about most this week?' },
-      { role: 'assistant', text: `Top topics from 312 conversations this week:
+      { role: 'assistant', text: `Top questions from 89 conversations:
 
-1. Shipping delays (23%) ⬆️ +40%
-2. Return policy (18%)
-3. Product availability (15%)
-4. Pricing questions (12%)
+1. "Do you have X in stock?" (34%) ⬆️
+2. "What are your hours?" (22%)
+3. "Do you offer delivery?" (18%)
+4. "Can I return this?" (12%)
 
-Alert: Shipping delays spiked Tuesday after the warehouse issue.` },
-      { role: 'user', text: 'Draft a response for the shipping delays' },
-      { role: 'assistant', text: `Here's a suggested response:
+Heads up: Stock questions up 50% - might need to update online inventory.` },
+      { role: 'user', text: 'Which products are they asking about?' },
+      { role: 'assistant', text: `Most asked-about products:
 
-"We're experiencing 2-3 day delays due to high demand. Your order is on track for delivery by [date]. Track it here: [link]"
+1. Pro Model (out of stock since Tuesday)
+2. Starter Bundle (in stock)
+3. Accessory Kit (low stock - 3 left)
 
-Want me to update all pending shipping inquiries with this message?` }
+The Pro Model is driving most "do you have" questions. Restock arriving Thursday.
+
+Want me to draft an auto-reply for Pro Model questions?` }
     ]
   },
   {
     id: 'code',
     title: 'Calculations',
-    description: 'Run complex calculations and process data',
+    description: 'Crunch numbers and forecast impact',
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
@@ -183,21 +201,29 @@ Want me to update all pending shipping inquiries with this message?` }
         { name: 'Forecasting', icon: '📐', bgColor: 'bg-pink-100', active: false }
       ],
       history: [
-        { label: 'Price impact', time: 'Just now', active: true },
-        { label: 'Revenue model', time: '2 days ago', active: false }
+        { label: 'Discount impact', time: 'Just now', active: true },
+        { label: 'Break-even', time: '2 days ago', active: false }
       ]
     },
     conversation: [
-      { role: 'user', text: 'If we increase prices by 15%, what\'s the impact on revenue assuming 10% customer churn?' },
-      { role: 'assistant', text: `Running the calculation with your current data...
+      { role: 'user', text: 'If I give a 15% discount, how many more units do I need to sell to make the same profit?' },
+      { role: 'assistant', text: `Based on your current margins:
 
-Current monthly revenue: $850,000
-After 15% price increase: $977,500
-After 10% churn: $879,750
+• Current: 100 units @ $50 = $2,000 profit
+• With 15% off: Need to sell 127 units (+27%)
 
-Net impact: +$29,750/month (+3.5%)
+Break-even point: 127 units at $42.50 each
 
-The price increase outweighs the churn. Want a breakdown by customer segment?` }
+That's 27 extra sales to make the same money. Worth it for clearing old inventory, risky for regular pricing.` },
+      { role: 'user', text: 'What if I do 10% instead?' },
+      { role: 'assistant', text: `At 10% discount:
+
+• Need to sell 115 units (+15%)
+• Break-even: 115 units at $45 each
+
+That's only 15 extra sales - much more achievable.
+
+Based on last month's traffic, a 10% promo typically boosts sales 20-25%. I'd go with 10%.` }
     ]
   }
 ]
@@ -219,9 +245,37 @@ export default function CapabilitiesShowcase() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-[1fr_1.6fr] gap-6 items-stretch">
-          {/* Left: Selection cards */}
-          <div className="grid grid-cols-2 gap-3 content-start">
+        <div className="grid lg:grid-cols-[1fr_1.6fr] gap-3 lg:gap-6 items-stretch">
+          {/* Mobile: Horizontal scroll tiles */}
+          <div className="lg:hidden overflow-hidden">
+            <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory touch-pan-x overscroll-x-contain scrollbar-hide">
+              {capabilities.map((cap) => (
+                <button
+                  key={cap.id}
+                  onClick={() => setActiveTab(cap.id)}
+                  className={`relative rounded-lg p-3 text-left transition-all flex-shrink-0 w-28 h-24 snap-start border-2 ${
+                    activeTab === cap.id
+                      ? 'bg-primary-600 border-primary-400'
+                      : 'bg-slate-800 border-transparent'
+                  }`}
+                >
+                  <div className={`inline-flex items-center justify-center w-8 h-8 rounded-lg mb-2 ${
+                    activeTab === cap.id
+                      ? 'bg-white/20 text-white'
+                      : 'bg-slate-700 text-primary-400'
+                  }`}>
+                    {cap.icon}
+                  </div>
+                  <h3 className="text-xs font-bold text-white leading-tight">
+                    {cap.title}
+                  </h3>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop: Selection cards grid */}
+          <div className="hidden lg:grid grid-cols-2 gap-3 content-start">
             {capabilities.map((cap) => (
               <button
                 key={cap.id}
