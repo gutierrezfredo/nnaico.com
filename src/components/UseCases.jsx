@@ -7,6 +7,16 @@ const useCases = [
     title: "Employee Onboarding",
     description: "New hires productive in days",
     gradient: "from-blue-400 to-indigo-500",
+    sidebar: {
+      assistants: [
+        { name: 'HR Assistant', icon: '📚', bgColor: 'bg-purple-100', active: true },
+        { name: 'IT Help', icon: '💻', bgColor: 'bg-blue-100', active: false }
+      ],
+      history: [
+        { label: 'Expense reports', time: 'Just now', active: true },
+        { label: 'Benefits enrollment', time: '2 hours ago', active: false }
+      ]
+    },
     conversation: [
       {
         role: 'user',
@@ -45,6 +55,16 @@ I've also sent you the full Expense Policy PDF to your email!`
     description: "Close deals faster with instant intel",
     gradient: "from-cyan-400 to-blue-500",
     image: "/images/use-case-sales.png",
+    sidebar: {
+      assistants: [
+        { name: 'Sales Helper', icon: '⚡', bgColor: 'bg-green-100', active: true },
+        { name: 'Product Info', icon: '📦', bgColor: 'bg-orange-100', active: false }
+      ],
+      history: [
+        { label: 'Pricing comparison', time: 'Just now', active: true },
+        { label: 'Case studies', time: '1 hour ago', active: false }
+      ]
+    },
     conversation: [
       {
         role: 'user',
@@ -83,6 +103,16 @@ Good luck with the pitch! Let me know how it goes.`
     description: "Any question, instant answer",
     gradient: "from-emerald-400 to-teal-500",
     image: "/images/use-case-knowledge.png",
+    sidebar: {
+      assistants: [
+        { name: 'Company Wiki', icon: '📖', bgColor: 'bg-emerald-100', active: true },
+        { name: 'Policy Guide', icon: '📋', bgColor: 'bg-gray-100', active: false }
+      ],
+      history: [
+        { label: 'PTO request', time: 'Just now', active: true },
+        { label: 'Meeting rooms', time: '3 hours ago', active: false }
+      ]
+    },
     conversation: [
       {
         role: 'user',
@@ -120,6 +150,16 @@ I'll let you know once it's approved!`
     description: "Instant answers for customers",
     gradient: "from-violet-400 to-purple-500",
     image: "/images/use-case-support.png",
+    sidebar: {
+      assistants: [
+        { name: 'Support Bot', icon: '💬', bgColor: 'bg-violet-100', active: true },
+        { name: 'Returns', icon: '↩️', bgColor: 'bg-red-100', active: false }
+      ],
+      history: [
+        { label: 'Return policy', time: 'Just now', active: true },
+        { label: 'Shipping info', time: '30 min ago', active: false }
+      ]
+    },
     conversation: [
       {
         role: 'user',
@@ -168,14 +208,14 @@ export default function UseCases() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-[440px_1fr] gap-12 items-start">
+        <div className="grid lg:grid-cols-[500px_1fr] gap-6 items-stretch">
           {/* Left: Image selection tiles */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 content-start">
             {useCases.map((useCase) => (
               <button
                 key={useCase.id}
                 onClick={() => setActiveCase(useCase.id)}
-                className={`relative rounded-2xl p-4 text-left transition-all overflow-hidden aspect-[3/4] ${
+                className={`relative rounded-lg p-4 text-left transition-all overflow-hidden aspect-[3/4] ${
                   activeCase === useCase.id
                     ? 'ring-2 ring-primary-500 ring-offset-2'
                     : 'hover:ring-2 hover:ring-gray-300'
@@ -210,12 +250,12 @@ export default function UseCases() {
           </div>
 
           {/* Right: Chat Mockup */}
-          <div className="lg:sticky lg:top-24">
+          <div className="lg:sticky lg:top-24 flex flex-col">
             <div
               key={activeCase}
-              className="animate-[fadeIn_0.4s_ease-out]"
+              className="animate-[fadeIn_0.4s_ease-out] flex-1 flex flex-col"
             >
-              <ChatMockup conversation={activeUseCase.conversation} minimal />
+              <ChatMockup conversation={activeUseCase.conversation} sidebar={activeUseCase.sidebar} minimal className="flex-1" />
             </div>
           </div>
         </div>

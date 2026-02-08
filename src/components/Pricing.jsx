@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const plans = [
   {
     name: 'Starter',
@@ -10,7 +12,7 @@ const plans = [
       'All tools included',
       'Email support'
     ],
-    cta: 'Start Free Trial',
+    cta: 'Book a demo',
     popular: false
   },
   {
@@ -25,7 +27,7 @@ const plans = [
       'Priority support',
       'Advanced analytics'
     ],
-    cta: 'Start Free Trial',
+    cta: 'Book a demo',
     popular: true
   },
   {
@@ -63,64 +65,56 @@ export default function Pricing() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`rounded-2xl p-8 flex flex-col ${
-                plan.popular
-                  ? 'bg-primary-600 text-white ring-4 ring-primary-300 scale-105'
-                  : 'bg-white border border-gray-200'
-              }`}
+              className="rounded-lg p-8 flex flex-col bg-white border border-gray-200 relative"
             >
               {plan.popular && (
-                <span className="inline-block bg-white text-primary-600 text-xs font-semibold px-3 py-1 rounded-full mb-4">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary-600 text-white text-xs font-semibold px-3 py-1 rounded-md">
                   Most Popular
                 </span>
               )}
-              <h3 className={`text-xl font-bold ${plan.popular ? 'text-white' : 'text-gray-900'}`}>
+              <h3 className="text-xl font-bold text-gray-900">
                 {plan.name}
               </h3>
               <div className="mt-4 mb-2">
-                <span className={`text-4xl font-bold ${plan.popular ? 'text-white' : 'text-gray-900'}`}>
+                <span className="text-4xl font-bold text-gray-900">
                   {plan.price}
                 </span>
-                <span className={plan.popular ? 'text-blue-100' : 'text-gray-500'}>
+                <span className="text-gray-500">
                   {plan.period}
                 </span>
               </div>
-              <p className={`text-sm mb-6 ${plan.popular ? 'text-blue-100' : 'text-gray-600'}`}>
+              <p className="text-sm mb-6 text-gray-600">
                 {plan.description}
               </p>
               <ul className="space-y-3 mb-8 flex-grow">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-3">
                     <svg
-                      className={`w-5 h-5 flex-shrink-0 ${plan.popular ? 'text-blue-200' : 'text-primary-600'}`}
+                      className="w-5 h-5 flex-shrink-0 text-primary-600"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    <span className={`text-sm ${plan.popular ? 'text-white' : 'text-gray-600'}`}>
+                    <span className="text-sm text-gray-600">
                       {feature}
                     </span>
                   </li>
                 ))}
               </ul>
-              <a
-                href="https://insight.nnaico.com"
-                className={`block w-full text-center py-3 px-4 rounded-full font-semibold transition-colors ${
-                  plan.popular
-                    ? 'bg-white text-primary-600 hover:bg-gray-100'
-                    : 'bg-primary-600 text-white hover:bg-primary-700'
-                }`}
+              <Link
+                to="/demo"
+                className="block w-full text-center py-3 px-4 rounded-md font-semibold transition-colors bg-primary-600 text-white hover:bg-primary-700"
               >
                 {plan.cta}
-              </a>
+              </Link>
             </div>
           ))}
         </div>
 
         <p className="text-center text-gray-500 mt-8 text-sm">
-          All plans include: Memory, all tools, admin dashboard, website embedding. 14-day free trial.
+          All plans include: Memory, all tools, admin dashboard, website embedding.
         </p>
       </div>
     </section>

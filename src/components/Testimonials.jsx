@@ -7,7 +7,7 @@ const testimonials = [
     highlight: ["transformed", "hours of searching now takes seconds"],
     author: "Operations Director",
     company: "Racing Force Group",
-    logo: "/logos/rfg.png"
+    logo: "/images/racing-force-group-logo.png"
   },
   {
     id: 'seedtrust',
@@ -22,7 +22,7 @@ const testimonials = [
 function highlightText(quote, highlights) {
   let result = quote
   highlights.forEach(phrase => {
-    result = result.replace(phrase, `<span class="text-primary-600">${phrase}</span>`)
+    result = result.replace(phrase, `<span class="text-primary-400">${phrase}</span>`)
   })
   return result
 }
@@ -32,42 +32,47 @@ export default function Testimonials() {
   const activeTestimonial = testimonials[activeIndex]
 
   return (
-    <section className="py-16 md:py-24 lg:py-32 bg-[#ECF4FF]">
+    <section className="py-16 md:py-24 lg:py-32 bg-slate-900">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {/* Quote icon */}
+        <div className="flex justify-center mb-8">
+          <div className="w-16 h-16 rounded-full bg-primary-500/20 flex items-center justify-center">
+            <svg className="w-8 h-8 text-primary-400" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+            </svg>
+          </div>
+        </div>
+
         {/* Quote text */}
         <p
-          className="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-900 leading-snug mb-10"
-          dangerouslySetInnerHTML={{ __html: highlightText(activeTestimonial.quote, activeTestimonial.highlight) }}
+          className="text-2xl md:text-3xl lg:text-4xl font-medium text-white leading-snug mb-10"
+          dangerouslySetInnerHTML={{ __html: `"${highlightText(activeTestimonial.quote, activeTestimonial.highlight)}"` }}
         />
 
         {/* Author */}
-        <div className="mb-12">
-          <span className="text-gray-900 font-semibold">{activeTestimonial.author}</span>
-          <span className="text-gray-400 mx-2">·</span>
-          <span className="text-gray-500">{activeTestimonial.company}</span>
+        <div className="mb-16">
+          <span className="text-white font-semibold">{activeTestimonial.author}</span>
+          <span className="text-slate-500 mx-2">·</span>
+          <span className="text-slate-400">{activeTestimonial.company}</span>
         </div>
 
         {/* Logo selector */}
-        <div className="flex justify-center items-center gap-4">
+        <div className="flex justify-center items-center gap-12">
           {testimonials.map((testimonial, index) => (
             <button
               key={testimonial.id}
               onClick={() => setActiveIndex(index)}
-              className={`transition-all rounded-xl overflow-hidden ${
+              className={`transition-all ${
                 index === activeIndex
-                  ? 'ring-2 ring-primary-500 scale-110 shadow-lg'
-                  : 'opacity-50 hover:opacity-75 grayscale hover:grayscale-0'
+                  ? 'scale-110 brightness-0 invert'
+                  : 'opacity-40 hover:opacity-70 brightness-0 invert'
               }`}
             >
-              <div className={`w-24 h-12 md:w-28 md:h-14 bg-white flex items-center justify-center p-2 ${
-                index === activeIndex ? 'bg-white' : ''
-              }`}>
-                <img
-                  src={testimonial.logo}
-                  alt={testimonial.company}
-                  className="w-full h-full object-contain"
-                />
-              </div>
+              <img
+                src={testimonial.logo}
+                alt={testimonial.company}
+                className="h-5 md:h-6 w-auto object-contain"
+              />
             </button>
           ))}
         </div>
