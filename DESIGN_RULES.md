@@ -83,3 +83,14 @@ Before delivering:
 - Container uses `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`?
 - Feature grids use `gap-8 md:gap-12`?
 - Typography uses responsive sizes?
+
+---
+
+## Inspiration
+
+| Site | Notes |
+|------|-------|
+| [Realm](https://www.withrealm.com/) | Clean layout, BookDemo page reference |
+| [Paradigm AI](https://www.paradigmai.com/) | AI product positioning |
+| [Cohere](https://cohere.com/) | Enterprise AI styling |
+| [Intercom](https://www.intercom.com/suite) | Product suite presentation |
